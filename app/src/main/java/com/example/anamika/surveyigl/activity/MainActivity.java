@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         formattedDate = df.format(c.getTime());
     // Now formattedDate have current date/time
-        Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
 
 
     //to restart the activity
