@@ -79,7 +79,7 @@
                 <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Business Partner Number"
+                android:text="Business Partner Number(if any)"
                 android:textSize="18dp"
                 android:layout_below="@+id/edt2"
                 android:background="#BBDEFB"
