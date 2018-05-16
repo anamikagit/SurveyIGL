@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Double latitude,longitude;
     private static final String TAG = "MAIN_ACTIVITY_ASYNC";
 
-    Button button,button_add_new;
+    Button button_submit,button_add_new;
 
     @BindView(R.id.edt1)EditText editText1;
     @BindView(R.id.edt2)EditText editText2;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        button = findViewById(R.id.submit_button);
+        button_submit = findViewById(R.id.submit_button);
         button_add_new = findViewById(R.id.add_new_button);
 
         final Intent finalStarterIntent = starterIntent;
@@ -122,11 +122,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_LONG).show();
                 submitSurveyData();
+                Intent i = new Intent(MainActivity.this,SendingMeterImageActivity.class);
+                startActivity(i);
             }
         });
 
