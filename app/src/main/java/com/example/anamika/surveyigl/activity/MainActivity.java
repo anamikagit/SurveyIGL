@@ -1,6 +1,7 @@
 package com.example.anamika.surveyigl.activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,8 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.anamika.surveyigl.activity.SharedPrefActivity.PREFS_NAME;
 
 public class MainActivity extends AppCompatActivity {
     private List<String> surveyFields = new ArrayList<String>();
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+       /* SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+        String decodedImage = sharedPreferences.getString("encodedImage", "imageCode");*/
 
         Calendar c = Calendar.getInstance();
         System.out.println("Current time =&gt; "+c.getTime());

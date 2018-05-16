@@ -28,6 +28,8 @@ import static java.util.Locale.getDefault;
 public class SendingMeterImageActivity extends AppCompatActivity {
     ImageView imageView;
     Button clickImg;
+    Bitmap bitmap;
+    String imageCode;
 
     // directory name to store captured images and videos
     private static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
@@ -164,12 +166,12 @@ public class SendingMeterImageActivity extends AppCompatActivity {
             // images
             options.inSampleSize = 8;
 
-            final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(),
+            bitmap = BitmapFactory.decodeFile(fileUri.getPath(),
                     options);
 
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
             byte[] imageBytes = byteArrayOutputStream.toByteArray();
-            String imageString = Base64.encodeToString(imageBytes,Base64.DEFAULT);
+            imageCode = Base64.encodeToString(imageBytes,Base64.DEFAULT);
             imageView.setVisibility(View.VISIBLE);
 
             /* // bimatp factory
