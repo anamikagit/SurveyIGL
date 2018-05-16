@@ -207,8 +207,8 @@ public class SendingMeterImageActivity extends AppCompatActivity {
         }
     }
     public void SendingImage(){
-
-        Call<List<ImageServerResponce>> call = apiService.sendingImage(imageCode+"","3435345345345345","1");
+        // API FILLED WITH DUMMY DATA
+        Call<List<ImageServerResponce>> call = apiService.sendingImage(imageCode+"","3435345345345345","ju67g","1");
 
         call.enqueue(new Callback<List<ImageServerResponce>>() {
 

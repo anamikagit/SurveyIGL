@@ -36,6 +36,7 @@ public interface ApiInterface {
     Call<List<ImageServerResponce>> sendingImage(
             @Field("img_data") String temp,
             @Field("date_time") String imei,
+            @Field("serialno") String serialNum,
             @Field("img_type")String imgType);
 }
 
