@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.edt5)EditText editText5;
     @BindView(R.id.edt6)EditText editText6;
     @BindView(R.id.edt7)EditText editText7;
-    @BindView(R.id.edt8)EditText editText8;
-    @BindView(R.id.edt9)EditText editText9;
-    @BindView(R.id.edt10)EditText editText10;
+    //@BindView(R.id.edt8)EditText editText8;
+    //@BindView(R.id.edt9)EditText editText9;
+    //@BindView(R.id.edt10)EditText editText10;
     @BindView(R.id.edt11)EditText editText11;
     @BindView(R.id.fetch_btn)Button buttonFetch;
     @BindView(R.id.lat)TextView textView_lat;
@@ -148,9 +148,9 @@ public class MainActivity extends AppCompatActivity {
                 editText5.getText().clear();
                 editText6.getText().clear();
                 editText7.getText().clear();
-                editText8.getText().clear();
-                editText9.getText().clear();
-                editText10.getText().clear();
+                //editText8.getText().clear();
+                //editText9.getText().clear();
+                //editText10.getText().clear();
                 editText11.getText().clear();
                 editText12.getText().clear();
                 textView_lat.setText("");
@@ -162,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
 
         Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
                 editText12.getText().toString(),editText2.getText().toString(),editText3.getText().toString(),editText4.getText().toString(),
-                editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText8.getText().toString(),
-                editText9.getText().toString(),editText10.getText().toString(),editText11.getText().toString(),lat,lng,formattedDate);
+                editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText11.getText().toString(),
+                lat,lng,formattedDate);
 
 
        /* Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
