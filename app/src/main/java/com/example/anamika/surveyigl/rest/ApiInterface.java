@@ -1,17 +1,21 @@
 package com.example.anamika.surveyigl.rest;
 
+import com.example.anamika.surveyigl.activity.ImageServerResponce;
 import com.example.anamika.surveyigl.model.SurvayStatus;
 
 import java.util.List;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
 
     @GET("Ins_Install_Survay")
-    Call<List<SurvayStatus>> sendSurveyResponce
-            (@Query("Business_part_no") String Business_part_no,
+    Call<List<SurvayStatus>> sendSurveyResponce(
+             @Query("Business_part_no") String Business_part_no,
              @Query("Name") String Name,
              @Query("Address") String Address,
              @Query("Mob_no") String Mob_no,
@@ -26,5 +30,12 @@ public interface ApiInterface {
              @Query("lat") String lat,
              @Query("lon") String lon,
              @Query("currenttime") String formattedDate);
+
+    @POST("/Ins_meter_image")
+    @FormUrlEncoded
+    Call<List<ImageServerResponce>> sendingImage(
+            @Field("img_data") String temp,
+            @Field("date_time") String imei,
+            @Field("img_type")String imgType);
 }
 

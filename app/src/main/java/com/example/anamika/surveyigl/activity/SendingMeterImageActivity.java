@@ -16,20 +16,29 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.anamika.surveyigl.R;
+import com.example.anamika.surveyigl.rest.ApiClient;
+import com.example.anamika.surveyigl.rest.ApiInterface;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static java.util.Locale.getDefault;
 
 public class SendingMeterImageActivity extends AppCompatActivity {
     ImageView imageView;
-    Button clickImg;
+    Button clickImg,btnSendImg;
     Bitmap bitmap;
     String imageCode;
+
+    ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     // directory name to store captured images and videos
     private static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
@@ -43,6 +52,7 @@ public class SendingMeterImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sending_meter_image);
 
+        btnSendImg = findViewById(R.id.btnImageSend);
         imageView = findViewById(R.id.imgPreview);
         clickImg = findViewById(R.id.btnCapturePicture);
 
@@ -50,6 +60,13 @@ public class SendingMeterImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 captureImage();
+            }
+        });
+
+        btnSendImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendingImage();
             }
         });
 
@@ -188,5 +205,30 @@ public class SendingMeterImageActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+    }
+    public void SendingImage(){
+
+        Call<List<ImageServerResponce>> call = apiService.sendingImage(imageCode+"","3435345345345345","1");
+
+        call.enqueue(new Callback<List<ImageServerResponce>>() {
+
+            @Override
+            public void onResponse(Call<List<ImageServerResponce>> call, Response<List<ImageServerResponce>> response) {
+
+                List<ImageServerResponce> imageServerResponces = response.body();
+                if(imageServerResponces != null && imageServerResponces.size()>0){
+                    ImageServerResponce imageServerResponce = imageServerResponces.get(0);
+                    Toast.makeText(SendingMeterImageActivity.this,"Image sent Successfully",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(SendingMeterImageActivity.this,"Error Sending image",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ImageServerResponce>> call, Throwable t) {
+
+            }
+        });
     }
 }

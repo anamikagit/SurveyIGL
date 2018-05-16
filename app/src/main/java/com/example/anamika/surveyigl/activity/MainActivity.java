@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.lat)TextView textView_lat;
     @BindView(R.id.lng)TextView textView_lng;
 
-    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+    ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
