@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_LONG).show();
                 submitSurveyData();
-                Intent i = new Intent(MainActivity.this,RetroSendingMeterImageActivity.class);
+                Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
                 startActivity(i);
             }
         });
