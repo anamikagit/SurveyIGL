@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">IGL SURVEY</string>
+
+    <string-array name="tv_display">
+        <item>s</item>
+        <item>u</item>
+    </string-array>
+
+    <array name="card_images">
+        <item>@drawable/surveillance</item>
+        <item>@drawable/surveillance</item>
+    </array>
 </resources>
