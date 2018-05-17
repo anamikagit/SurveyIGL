@@ -1,7 +1,5 @@
 package com.example.anamika.surveyigl.activity;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -195,13 +193,6 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
     }
     public void SendingImage()
     {
-       /* mProgressDialog = new ProgressDialog(context,
-                AlertDialog.THEME_HOLO_LIGHT);
-        mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setIndeterminate(false);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.show();*/
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://111.118.178.163/amrs_igl_api/webservice.asmx/Ins_meter_image?",
                 new Response.Listener<String>() {
                     @Override
