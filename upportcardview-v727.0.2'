@@ -1,0 +1,98 @@
+[33mcommit 3d5bb069d14cfb607042d04193d39a132f9399e0[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Thu May 17 17:11:51 2018 +0530
+
+    main_cardview layout added
+
+[33mcommit f25672ba22828d381f8403b6e29a65635244fe7f[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Thu May 17 17:07:04 2018 +0530
+
+    content-card_menu.xml added
+
+[33mcommit b284e10d28c6efef8ec128855cc624fb1cc2c93c[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Thu May 17 16:45:43 2018 +0530
+
+    cardview and recycler view dependencies added
+
+[33mcommit e81f556004b6279969d1461a130ec475f78d9e08[m
+Merge: 6e83614 94c8063
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Thu May 17 13:55:54 2018 +0530
+
+    Merge pull request #1 from anamikagit/app-restarted
+    
+    App restarted
+
+[33mcommit 94c8063e812de9fe0638696b2f55532fe12cb51f[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Thu May 17 13:50:13 2018 +0530
+
+    image sent to server successssssfullllllllllllyyyyyyyyyyyyyyy :)  but using Volley
+
+[33mcommit f0876bf078d52825a0ee885468823a00c44b9a80[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Thu May 17 13:24:44 2018 +0530
+
+    trying network call using volley
+
+[33mcommit baa2af6ff08de06071f1a17abe5da91816293400[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Thu May 17 12:05:25 2018 +0530
+
+    retro and volley activity added for network call
+
+[33mcommit 61a9d192901f2a5233acb570be511fad0ffead50[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Wed May 16 19:10:57 2018 +0530
+
+    meter image sending api changed
+
+[33mcommit 9260ec3afe4ab737a58add5e3be086a38005af96[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Wed May 16 19:04:29 2018 +0530
+
+    form submitting api changed
+
+[33mcommit 94ed532f53efa4a74d1355b27537b2fb6579725d[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Wed May 16 17:10:46 2018 +0530
+
+    network call added
+
+[33mcommit 40e4b2080520efd556ee44b401b158c649e64dc0[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Wed May 16 15:42:35 2018 +0530
+
+    shared pref added
+
+[33mcommit 14a90efa1a6a4cd1617b0e2fd7aaacff47ee20c9[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Wed May 16 15:08:26 2018 +0530
+
+    image captured successfuly
+
+[33mcommit 692404df2e50fb26f8c2bb37a1bd0ff4857fa1ad[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Wed May 16 13:55:41 2018 +0530
+
+    image decoding activity added
+
+[33mcommit 0810f7bcda9f5dc181abc63d79b3107de8532422[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Tue May 15 15:06:18 2018 +0530
+
+    adding icon changing app name
+
+[33mcommit b0140cb3543ba99e373d9c4b37108cb8ae877f74[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Tue May 15 14:03:21 2018 +0530
+
+    BP num if any
+
+[33mcommit 6e83614e7fce70cdfbe315d8590a4e97860ff175[m
+Author: anamikagit <anamika.arya1990@gmail.com>
+Date:   Tue May 15 12:08:46 2018 +0530
+
+    Initial commit
