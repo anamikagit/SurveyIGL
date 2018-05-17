@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".activity.CardMenuActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <include layout="@layout/content_main" />
+
+    </android.support.constraint.ConstraintLayout>
