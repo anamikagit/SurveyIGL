@@ -32,7 +32,7 @@ import retrofit2.Response;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static java.util.Locale.getDefault;
 
-public class SendingMeterImageActivity extends AppCompatActivity {
+public class RetroSendingMeterImageActivity extends AppCompatActivity {
     ImageView imageView;
     Button clickImg,btnSendImg;
     Bitmap bitmap;
@@ -218,10 +218,10 @@ public class SendingMeterImageActivity extends AppCompatActivity {
                 List<ImageServerResponce> imageServerResponces = response.body();
                 if(imageServerResponces != null && imageServerResponces.size()>0){
                     ImageServerResponce imageServerResponce = imageServerResponces.get(0);
-                    Toast.makeText(SendingMeterImageActivity.this,"Image sent Successfully",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RetroSendingMeterImageActivity.this,"Image sent Successfully",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(SendingMeterImageActivity.this,"Error Sending image",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RetroSendingMeterImageActivity.this,"Error Sending image",Toast.LENGTH_SHORT).show();
                 }
             }
 

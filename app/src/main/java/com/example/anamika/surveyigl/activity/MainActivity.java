@@ -1,7 +1,6 @@
 package com.example.anamika.surveyigl.activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,8 +27,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.anamika.surveyigl.activity.SharedPrefActivity.PREFS_NAME;
 
 public class MainActivity extends AppCompatActivity {
     private List<String> surveyFields = new ArrayList<String>();
@@ -132,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_LONG).show();
                 submitSurveyData();
-                Intent i = new Intent(MainActivity.this,SendingMeterImageActivity.class);
+                Intent i = new Intent(MainActivity.this,RetroSendingMeterImageActivity.class);
                 startActivity(i);
             }
         });
