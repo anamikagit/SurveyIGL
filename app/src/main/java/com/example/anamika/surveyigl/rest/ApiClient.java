@@ -6,8 +6,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-        public static Retrofit getClient(){
-
+    public static final String baseUrl = "http://111.118.178.163/amrs_igl_api/webservice.asmx/";
+        public static Retrofit getClient(String baseUrl){
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build();
@@ -15,11 +15,10 @@ public class ApiClient {
 
             Retrofit retrofit = new Retrofit
                     .Builder()
-                    .baseUrl("http://111.118.178.163/amrs_igl_api/webservice.asmx/")
+                    .baseUrl(baseUrl)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             return retrofit;
         }
     }
-

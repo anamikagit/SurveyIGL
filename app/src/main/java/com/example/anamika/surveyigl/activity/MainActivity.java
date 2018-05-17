@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Double latitude,longitude;
     private static final String TAG = "MAIN_ACTIVITY_ASYNC";
 
-    Button button,button_add_new;
+    Button button_submit,button_add_new;
 
     @BindView(R.id.edt1)EditText editText1;
     @BindView(R.id.edt2)EditText editText2;
@@ -45,28 +45,30 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.edt5)EditText editText5;
     @BindView(R.id.edt6)EditText editText6;
     @BindView(R.id.edt7)EditText editText7;
-    @BindView(R.id.edt8)EditText editText8;
-    @BindView(R.id.edt9)EditText editText9;
-    @BindView(R.id.edt10)EditText editText10;
+    //@BindView(R.id.edt8)EditText editText8;
+    //@BindView(R.id.edt9)EditText editText9;
+    //@BindView(R.id.edt10)EditText editText10;
     @BindView(R.id.edt11)EditText editText11;
     @BindView(R.id.fetch_btn)Button buttonFetch;
     @BindView(R.id.lat)TextView textView_lat;
     @BindView(R.id.lng)TextView textView_lng;
 
-    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+    ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+       /* SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+        String decodedImage = sharedPreferences.getString("encodedImage", "imageCode");*/
 
         Calendar c = Calendar.getInstance();
         System.out.println("Current time =&gt; "+c.getTime());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         formattedDate = df.format(c.getTime());
     // Now formattedDate have current date/time
-        Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
 
 
     //to restart the activity
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        button = findViewById(R.id.submit_button);
+        button_submit = findViewById(R.id.submit_button);
         button_add_new = findViewById(R.id.add_new_button);
 
         final Intent finalStarterIntent = starterIntent;
@@ -122,11 +124,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_LONG).show();
                 submitSurveyData();
+                Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
+                startActivity(i);
             }
         });
 
@@ -141,9 +145,9 @@ public class MainActivity extends AppCompatActivity {
                 editText5.getText().clear();
                 editText6.getText().clear();
                 editText7.getText().clear();
-                editText8.getText().clear();
-                editText9.getText().clear();
-                editText10.getText().clear();
+                //editText8.getText().clear();
+                //editText9.getText().clear();
+                //editText10.getText().clear();
                 editText11.getText().clear();
                 editText12.getText().clear();
                 textView_lat.setText("");
@@ -155,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
 
         Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
                 editText12.getText().toString(),editText2.getText().toString(),editText3.getText().toString(),editText4.getText().toString(),
-                editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText8.getText().toString(),
-                editText9.getText().toString(),editText10.getText().toString(),editText11.getText().toString(),lat,lng,formattedDate);
+                editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText11.getText().toString(),
+                lat,lng,formattedDate);
 
 
        /* Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
