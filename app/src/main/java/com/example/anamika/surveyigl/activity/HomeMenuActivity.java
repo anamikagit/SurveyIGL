@@ -1,11 +1,13 @@
 package com.example.anamika.surveyigl.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,7 @@ public class HomeMenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<MenuData> dataList;
     private HomeCardAdapter gridCardAdapter;
+    CardView surveyCard,cameraCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,14 @@ public class HomeMenuActivity extends AppCompatActivity {
 
         initCollapsingToolbar();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+       /* surveyCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeMenuActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });*/
 
         dataList = new ArrayList<>();
         gridCardAdapter = new HomeCardAdapter(this, dataList);
@@ -80,8 +91,8 @@ public class HomeMenuActivity extends AppCompatActivity {
     }
     private void prepareCards() {
         int[] covers = new int[]{
-                R.drawable.image,
-                R.drawable.image,
+                R.drawable.survey_form,
+                R.drawable.camera,
                 /* R.drawable.image,
                  R.drawable.image,
                  R.drawable.image,
