@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -56,9 +57,9 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sending_meter_image);
+        setContentView(R.layout.activity_volley_sending_meter_image);
 
-        btnSendImg = findViewById(R.id.btnImageSend);
+        btnSendImg = findViewById(R.id.sendImage);
         imageView = findViewById(R.id.imgPreview);
         clickImg = findViewById(R.id.btnCapturePicture);
 
@@ -74,6 +75,9 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                 SendingImage();
             }
         });
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Calendar c = Calendar.getInstance();
         System.out.println("Current time =&gt; "+c.getTime());
