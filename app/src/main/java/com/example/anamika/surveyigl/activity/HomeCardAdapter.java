@@ -24,22 +24,49 @@ public class HomeCardAdapter extends RecyclerView.Adapter<HomeCardAdapter.MyView
             this.dataList = dataList;
         }
 
+
+        // creating interface for card click
+        public OnItemClickListener onItemClickListener;
+
+        public interface OnItemClickListener{
+        void onItemClick(int position);
+        }
+
+        public void setOnItemClickListener(OnItemClickListener listener){
+            onItemClickListener = listener;
+        }
+
+
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public TextView tvLabel, tvDisplay;
             public ImageView cardImage;
 
-            public MyViewHolder(View itemView) {
+            public MyViewHolder(View itemView , final OnItemClickListener listener) {
                 super(itemView);
                 //tvDisplay = itemView.findViewById(R.id.tv_display);
                 tvLabel = itemView.findViewById(R.id.tv_label);
                 cardImage = itemView.findViewById(R.id.card_image);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(listener !=null){
+                            int position = getAdapterPosition();
+                            if(position !=RecyclerView.NO_POSITION){
+                                listener.onItemClick(position);
+                            }
+                        }
+                    }
+                });
             }
         }
 
         @Override
         public HomeCardAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_single_row, parent,false);
-            return new MyViewHolder(itemView);
+            MyViewHolder myViewHolder = new MyViewHolder(itemView,onItemClickListener);
+            //return new MyViewHolder(itemView);
+            return myViewHolder;
         }
 
         @Override

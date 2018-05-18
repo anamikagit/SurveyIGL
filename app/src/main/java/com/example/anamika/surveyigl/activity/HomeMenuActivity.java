@@ -56,6 +56,14 @@ public class HomeMenuActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(gridCardAdapter);
 
+        gridCardAdapter.setOnItemClickListener(new HomeCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent i = new Intent(HomeMenuActivity.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
+
         prepareCards();
         try {
             Glide.with(this).load(R.drawable.image).into((ImageView) findViewById(R.id.card_image));
