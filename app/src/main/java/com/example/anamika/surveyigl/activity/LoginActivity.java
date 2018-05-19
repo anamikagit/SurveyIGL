@@ -43,6 +43,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.anamika.surveyigl.R;
+import com.example.anamika.surveyigl.model.SurvayStatus;
+import com.example.anamika.surveyigl.rest.ApiClient;
+import com.example.anamika.surveyigl.rest.ApiInterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -55,6 +62,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputUid,inputPassword;
     private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutPassword;
     private Button btnLogIn;
+    Editable saveUid;
+    Editable savePwd;
+    ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +90,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitForm();
+               // submitForm();
+                sendLoginCredential();
                 Intent i = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(i);
 
@@ -182,5 +193,35 @@ public class LoginActivity extends AppCompatActivity {
                     break;*/
             }
         }
+    }
+
+    public void sendLoginCredential(){
+
+        Call<List<SurvayStatus>> call = apiService.sendLoginCredential("","");
+
+
+       /* Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
+                editText12.getText().toString(),editText2.getText().toString(),editText3.getText().toString(),editText4.getText().toString(),
+                editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText8.getText().toString(),
+                editText9.getText().toString(),editText10.getText().toString(),editText11.getText().toString(),lat,lng);*/
+
+        call.enqueue(new Callback<List<SurvayStatus>>() {
+            @Override
+            public void onResponse(Call<List<SurvayStatus>> call, Response<List<SurvayStatus>> response) {
+                List<SurvayStatus> survayStatuses = response.body();
+                if(survayStatuses != null && survayStatuses.size()>0){
+                    SurvayStatus survayStatus = survayStatuses.get(0);
+                    Toast.makeText(LoginActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"Error Submitting Form", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SurvayStatus>> call, Throwable t) {
+
+            }
+        });
     }
 }
