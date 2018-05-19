@@ -14,7 +14,7 @@ android:layout_height="match_parent">
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="#FFD54F"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 </android.support.design.widget.AppBarLayout>
@@ -34,14 +34,14 @@ android:layout_height="match_parent">
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/input_name"
+            android:id="@+id/input_uid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="@string/hint_name" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <!--<android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -53,7 +53,7 @@ android:layout_height="match_parent">
             android:inputType="textEmailAddress"
             android:hint="@string/hint_email" />
     </android.support.design.widget.TextInputLayout>
-
+-->
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_password"
         android:layout_width="match_parent"
@@ -67,11 +67,11 @@ android:layout_height="match_parent">
             android:hint="@string/hint_password" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button android:id="@+id/btn_signup"
+    <Button android:id="@+id/btn_logIn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_sign_up"
-        android:background="@color/colorPrimary"
+        android:background="#FFD54F"
         android:layout_marginTop="40dp"
         android:textColor="@android:color/white"/>
 

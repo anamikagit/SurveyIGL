@@ -52,9 +52,9 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class LoginActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private EditText inputName, inputEmail, inputPassword;
+    private EditText inputUid,inputPassword;
     private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutPassword;
-    private Button btnSignUp;
+    private Button btnLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,22 +65,25 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
-        inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
+       // inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
         inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
 
-        inputName = (EditText) findViewById(R.id.input_name);
-        inputEmail = (EditText) findViewById(R.id.input_email);
+        inputUid = (EditText) findViewById(R.id.input_uid);
+       // inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
-        btnSignUp = (Button) findViewById(R.id.btn_signup);
+        btnLogIn = (Button) findViewById(R.id.btn_logIn);
 
-       /* inputName.addTextChangedListener(new MyTextWatcher(inputName));
-        inputEmail.addTextChangedListener(new MyTextWatcher(inputEmail));
-        inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));*/
+        inputUid.addTextChangedListener(new MyTextWatcher(inputUid));
+       // inputEmail.addTextChangedListener(new MyTextWatcher(inputEmail));
+        inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 submitForm();
+                Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(i);
+
             }
         });
     }
@@ -93,21 +96,21 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if (!validateEmail()) {
+        /*if (!validateEmail()) {
             return;
         }
 
         if (!validatePassword()) {
             return;
-        }
+        }*/
 
         Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
     }
 
     private boolean validateName() {
-        if (inputName.getText().toString().trim().isEmpty()) {
+        if (inputUid.getText().toString().trim().isEmpty()) {
             inputLayoutName.setError(getString(R.string.err_msg_name));
-            requestFocus(inputName);
+            requestFocus(inputUid);
             return false;
         } else {
             inputLayoutName.setErrorEnabled(false);
@@ -116,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validateEmail() {
+    /*private boolean validateEmail() {
         String email = inputEmail.getText().toString().trim();
 
         if (email.isEmpty() || !isValidEmail(email)) {
@@ -129,8 +132,8 @@ public class LoginActivity extends AppCompatActivity {
 
         return true;
     }
-
-    private boolean validatePassword() {
+*/
+   /* private boolean validatePassword() {
         if (inputPassword.getText().toString().trim().isEmpty()) {
             inputLayoutPassword.setError(getString(R.string.err_msg_password));
             requestFocus(inputPassword);
@@ -140,12 +143,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return true;
-    }
+    }*/
 
-    private static boolean isValidEmail(String email) {
+   /* private static boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
+*/
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -168,15 +171,15 @@ public class LoginActivity extends AppCompatActivity {
 
         public void afterTextChanged(Editable editable) {
             switch (view.getId()) {
-                case R.id.input_name:
+                case R.id.input_uid:
                     validateName();
                     break;
-                case R.id.input_email:
+                /*case R.id.input_email:
                     validateEmail();
                     break;
                 case R.id.input_password:
                     validatePassword();
-                    break;
+                    break;*/
             }
         }
     }
