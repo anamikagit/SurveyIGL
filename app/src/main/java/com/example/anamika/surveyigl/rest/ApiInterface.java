@@ -38,5 +38,10 @@ public interface ApiInterface {
             @Field("date_time") String imei,
             @Field("serialno") String serialNum,
             @Field("img_type")String imgType);
+
+    @GET("login")
+    Call<List<SurvayStatus>> sendLoginCredential(
+            @Query("uid") String UserId,
+            @Query("pwd") String pasword);
 }
 
