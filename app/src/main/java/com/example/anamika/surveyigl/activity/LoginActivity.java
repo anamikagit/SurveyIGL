@@ -96,12 +96,11 @@ public class LoginActivity extends AppCompatActivity {
                 savePwd = inputPassword.getText().toString();
                // submitForm();
                 sendLoginCredential();
-                Intent i = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(i);
 
             }
         });
     }
+
 
     /**
      * Validating form
@@ -219,9 +218,12 @@ public class LoginActivity extends AppCompatActivity {
                     if(survayStatus.getResponse().equals("success"))
                     {
                         Toast.makeText(LoginActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
-                    }}
+                        Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(i);
+                    }
                     else{
-                    Toast.makeText(LoginActivity.this,"Try Again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"Login Id or password is incorrect", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
