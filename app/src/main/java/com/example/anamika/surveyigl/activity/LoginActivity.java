@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.anamika.surveyigl.R;
+import com.example.anamika.surveyigl.model.LoginResponce;
 import com.example.anamika.surveyigl.model.SurvayStatus;
 import com.example.anamika.surveyigl.rest.ApiClient;
 import com.example.anamika.surveyigl.rest.ApiInterface;
@@ -200,7 +201,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void sendLoginCredential(){
 
-        Call<List<SurvayStatus>> call = apiService.sendLoginCredential(saveUid,savePwd);
+        Call<List<LoginResponce>> call = apiService.sendLoginCredential(saveUid,savePwd);
 
 
        /* Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
@@ -208,21 +209,24 @@ public class LoginActivity extends AppCompatActivity {
                 editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText8.getText().toString(),
                 editText9.getText().toString(),editText10.getText().toString(),editText11.getText().toString(),lat,lng);*/
 
-        call.enqueue(new Callback<List<SurvayStatus>>() {
+        call.enqueue(new Callback<List<LoginResponce>>() {
             @Override
-            public void onResponse(Call<List<SurvayStatus>> call, Response<List<SurvayStatus>> response) {
-                List<SurvayStatus> survayStatuses = response.body();
-                if(survayStatuses != null && survayStatuses.size()>0){
-                    SurvayStatus survayStatus = survayStatuses.get(0);
-                    Toast.makeText(LoginActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(LoginActivity.this,"Error Submitting Form", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<List<LoginResponce>> call, Response<List<LoginResponce>> response) {
+                List<LoginResponce> loginResponces = response.body();
+                if(loginResponces != null && loginResponces.size()>0){
+                    LoginResponce survayStatus = loginResponces.get(0);
+
+                    if(survayStatus.getResponse().equals("success"))
+                    {
+                        Toast.makeText(LoginActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
+                    }}
+                    else{
+                    Toast.makeText(LoginActivity.this,"Try Again", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<SurvayStatus>> call, Throwable t) {
+            public void onFailure(Call<List<LoginResponce>> call, Throwable t) {
 
             }
         });

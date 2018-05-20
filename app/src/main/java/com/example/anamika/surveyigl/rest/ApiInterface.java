@@ -3,6 +3,7 @@ package com.example.anamika.surveyigl.rest;
 import android.text.Editable;
 
 import com.example.anamika.surveyigl.activity.ImageServerResponce;
+import com.example.anamika.surveyigl.model.LoginResponce;
 import com.example.anamika.surveyigl.model.SurvayStatus;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public interface ApiInterface {
             @Field("img_type")String imgType);
 
     @GET("login")
-    Call<List<SurvayStatus>> sendLoginCredential(
+    Call<List<LoginResponce>> sendLoginCredential(
             @Query("uid") String UserId,
             @Query("pwd") String pasword);
 }
