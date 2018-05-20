@@ -62,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputUid,inputPassword;
     private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutPassword;
     private Button btnLogIn;
-    Editable saveUid;
-    Editable savePwd;
+    String saveUid;
+    String savePwd;
     ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     @Override
@@ -90,6 +90,9 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                saveUid = inputUid.getText().toString();
+                savePwd = inputPassword.getText().toString();
                // submitForm();
                 sendLoginCredential();
                 Intent i = new Intent(LoginActivity.this,MainActivity.class);
@@ -102,23 +105,23 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Validating form
      */
-    private void submitForm() {
+   /* private void submitForm() {
         if (!validateName()) {
             return;
         }
 
-        /*if (!validateEmail()) {
+        *//*if (!validateEmail()) {
             return;
         }
 
         if (!validatePassword()) {
             return;
-        }*/
+        }*//*
 
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
-    }
+        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
+    }*/
 
-    private boolean validateName() {
+   /* private boolean validateName() {
         if (inputUid.getText().toString().trim().isEmpty()) {
             inputLayoutName.setError(getString(R.string.err_msg_name));
             requestFocus(inputUid);
@@ -129,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 
         return true;
     }
-
+*/
     /*private boolean validateEmail() {
         String email = inputEmail.getText().toString().trim();
 
@@ -183,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
         public void afterTextChanged(Editable editable) {
             switch (view.getId()) {
                 case R.id.input_uid:
-                    validateName();
+                   // validateName();
                     break;
                 /*case R.id.input_email:
                     validateEmail();
@@ -197,7 +200,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void sendLoginCredential(){
 
-        Call<List<SurvayStatus>> call = apiService.sendLoginCredential("","");
+        Call<List<SurvayStatus>> call = apiService.sendLoginCredential(saveUid,savePwd);
 
 
        /* Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),

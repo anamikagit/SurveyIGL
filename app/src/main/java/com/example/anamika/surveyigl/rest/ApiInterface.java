@@ -1,5 +1,7 @@
 package com.example.anamika.surveyigl.rest;
 
+import android.text.Editable;
+
 import com.example.anamika.surveyigl.activity.ImageServerResponce;
 import com.example.anamika.surveyigl.model.SurvayStatus;
 
