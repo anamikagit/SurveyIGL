@@ -27,6 +27,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.anamika.surveyigl.Constants;
 import com.example.anamika.surveyigl.R;
+import com.example.anamika.surveyigl.model.LogoutResponce;
+import com.example.anamika.surveyigl.model.SurvayStatus;
+import com.example.anamika.surveyigl.rest.ApiClient;
+import com.example.anamika.surveyigl.rest.ApiInterface;
 import com.example.anamika.surveyigl.util.AppSharedData;
 
 import org.json.JSONArray;
@@ -39,8 +43,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Field;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
@@ -58,6 +65,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
 
     // file url to store image/video
     private Uri fileUri;
+    ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +118,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
 
             case R.id.menuLogout:
                // Toast.makeText(this, "You clicked logout", Toast.LENGTH_SHORT).show();
+                sendLogoutCall();
                 break;
         }
         return true;
@@ -273,4 +282,31 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-}
+
+    public  void sendLogoutCall(){
+       String logoutUid =  AppSharedData.get(VolleySendingMeterImageActivity.this,Constants.LOGOUT_ID,"");
+        Call<List<LogoutResponce>> call = apiService.sendLogotCall(logoutUid);
+
+       // AppSharedData.save(VolleySendingMeterImageActivity.this, Constants.LOGOUT_ID, editText7.getText().toString());
+
+
+        call.enqueue(new Callback<List<LogoutResponce>>() {
+            @Override
+            public void onResponse(Call<List<LogoutResponce>> call, retrofit2.Response<List<LogoutResponce>> response) {
+                List<LogoutResponce> logoutResponces = response.body();
+                if(logoutResponces != null && logoutResponces.size()>0){
+                    LogoutResponce logoutResponce = logoutResponces.get(0);
+                    Toast.makeText(VolleySendingMeterImageActivity.this,"Logged Out Successfully", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(VolleySendingMeterImageActivity.this,"Try Again", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<LogoutResponce>> call, Throwable t) {
+
+            }
+        });
+    }
+    }

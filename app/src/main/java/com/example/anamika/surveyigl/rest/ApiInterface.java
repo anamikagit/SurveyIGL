@@ -4,6 +4,7 @@ import android.text.Editable;
 
 import com.example.anamika.surveyigl.activity.ImageServerResponce;
 import com.example.anamika.surveyigl.model.LoginResponce;
+import com.example.anamika.surveyigl.model.LogoutResponce;
 import com.example.anamika.surveyigl.model.SurvayStatus;
 
 import java.util.List;
@@ -46,5 +47,10 @@ public interface ApiInterface {
     Call<List<LoginResponce>> sendLoginCredential(
             @Query("uid") String UserId,
             @Query("pwd") String pasword);
+
+
+    @GET("logout")
+    Call<List<LogoutResponce>> sendLogotCall(
+            @Query("uid") String uid);
 }
 

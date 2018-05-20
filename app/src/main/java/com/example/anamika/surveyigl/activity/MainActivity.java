@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText11.getText().toString(),
                 lat,lng,formattedDate);
 
-        AppSharedData.save(MainActivity.this, Constants.MTR_SRL_NUM_KEY, editText7.getText().toString());
+        //AppSharedData.save(MainActivity.this, Constants.MTR_SRL_NUM_KEY, editText7.getText().toString());
 
 
         call.enqueue(new Callback<List<SurvayStatus>>() {

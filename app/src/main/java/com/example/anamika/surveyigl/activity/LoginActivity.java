@@ -42,11 +42,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.anamika.surveyigl.Constants;
 import com.example.anamika.surveyigl.R;
 import com.example.anamika.surveyigl.model.LoginResponce;
 import com.example.anamika.surveyigl.model.SurvayStatus;
 import com.example.anamika.surveyigl.rest.ApiClient;
 import com.example.anamika.surveyigl.rest.ApiInterface;
+import com.example.anamika.surveyigl.util.AppSharedData;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -202,12 +204,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Call<List<LoginResponce>> call = apiService.sendLoginCredential(saveUid,savePwd);
 
-
-       /* Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
-                editText12.getText().toString(),editText2.getText().toString(),editText3.getText().toString(),editText4.getText().toString(),
-                editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText8.getText().toString(),
-                editText9.getText().toString(),editText10.getText().toString(),editText11.getText().toString(),lat,lng);*/
-
         call.enqueue(new Callback<List<LoginResponce>>() {
             @Override
             public void onResponse(Call<List<LoginResponce>> call, Response<List<LoginResponce>> response) {
@@ -220,6 +216,8 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(i);
+
+                        AppSharedData.save(LoginActivity.this, Constants.LOGOUT_ID, inputUid.getText().toString());
                     }
                     else{
                         Toast.makeText(LoginActivity.this,"Login Id or password is incorrect", Toast.LENGTH_SHORT).show();

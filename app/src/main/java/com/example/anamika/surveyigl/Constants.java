@@ -22,5 +22,6 @@ public final class Constants {
 
 //    SharedPreferences keys
     public static final String MTR_SRL_NUM_KEY = "MeterSerialNumberKey";
+    public static final String LOGOUT_ID = "LogoutId";
 
 }
