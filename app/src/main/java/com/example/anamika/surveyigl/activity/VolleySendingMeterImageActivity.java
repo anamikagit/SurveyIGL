@@ -22,7 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.anamika.surveyigl.Constants;
 import com.example.anamika.surveyigl.R;
+import com.example.anamika.surveyigl.util.AppSharedData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -231,7 +233,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("img_data", imageCode);
                 params.put("date_time", formattedDate);
-                params.put("serialno", 86474+"");
+                params.put("serialno", AppSharedData.get(VolleySendingMeterImageActivity.this, Constants.MTR_SRL_NUM_KEY,""));
                 params.put("img_type", 1+"");
                 System.out.println("Login SendData" + params);
                 return params;

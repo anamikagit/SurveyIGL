@@ -1,6 +1,8 @@
 package com.example.anamika.surveyigl;
 
-    public final class Constants {
+import android.content.SharedPreferences;
+
+public final class Constants {
     public static final int SUCCESS_RESULT = 0;
     public static final int FAILURE_RESULT = 1;
 
@@ -16,5 +18,9 @@ package com.example.anamika.surveyigl;
     public static final String LOCATION_LONGITUDE_DATA_EXTRA = PACKAGE_NAME + ".LOCATION_LONGITUDE_DATA_EXTRA";
     public static final String LOCATION_NAME_DATA_EXTRA = PACKAGE_NAME + ".LOCATION_NAME_DATA_EXTRA";
     public static final String FETCH_TYPE_EXTRA = PACKAGE_NAME + ".FETCH_TYPE_EXTRA";
+
+
+//    SharedPreferences keys
+    public static final String MTR_SRL_NUM_KEY = "MeterSerialNumberKey";
 
 }
