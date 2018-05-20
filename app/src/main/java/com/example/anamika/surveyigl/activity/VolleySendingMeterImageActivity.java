@@ -211,7 +211,9 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                             for(int j=0;j<array.length();j++) {
                                 JSONObject json = array.getJSONObject(j);
                                 if (!(imageCode.isEmpty())) {
-                                    Toast.makeText(getApplicationContext(), "Data Updated..Image Sent Successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Image Sent Successfully", Toast.LENGTH_LONG).show();
+                                    btnSendImg.setText("Image Submitted");
+                                    btnSendImg.setEnabled(false);
                                 } else {
                                     Toast.makeText(VolleySendingMeterImageActivity.this, "Login Again!! image is not clicked properly", Toast.LENGTH_LONG).show();
                                 }
@@ -225,7 +227,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                        // mProgressDialog.dismiss();
-                        Toast.makeText(VolleySendingMeterImageActivity.this, "Error, Please try again", Toast.LENGTH_LONG).show();
+                        Toast.makeText(VolleySendingMeterImageActivity.this, "Please try again", Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
