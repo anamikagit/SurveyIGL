@@ -104,6 +104,8 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
 
             case R.id.menuAddSurvey:
                // Toast.makeText(this, "You clicked settings", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(VolleySendingMeterImageActivity.this,MainActivity.class);
+                startActivity(i);
                 break;
 
             case R.id.menuLogout:
