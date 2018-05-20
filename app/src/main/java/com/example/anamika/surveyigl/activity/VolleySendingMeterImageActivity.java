@@ -297,6 +297,8 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                 if(logoutResponces != null && logoutResponces.size()>0){
                     LogoutResponce logoutResponce = logoutResponces.get(0);
                     Toast.makeText(VolleySendingMeterImageActivity.this,"Logged Out Successfully", Toast.LENGTH_SHORT).show();
+               Intent i = new Intent(VolleySendingMeterImageActivity.this,LoginActivity.class);
+               startActivity(i);
                 }
                 else{
                     Toast.makeText(VolleySendingMeterImageActivity.this,"Try Again", Toast.LENGTH_SHORT).show();
