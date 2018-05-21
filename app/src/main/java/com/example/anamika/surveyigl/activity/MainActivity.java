@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_LONG).show();
                 submitSurveyData();
-                Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
-                startActivity(i);
+                /*Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
+                startActivity(i);*/
             }
         });
 
@@ -177,9 +177,11 @@ public class MainActivity extends AppCompatActivity {
                 if(survayStatuses != null && survayStatuses.size()>0){
                     SurvayStatus survayStatus = survayStatuses.get(0);
                     Toast.makeText(MainActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
+                    startActivity(i);
                 }
                 else{
-                    Toast.makeText(MainActivity.this,"Error Submitting Form", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Fill All Fields Carefully", Toast.LENGTH_SHORT).show();
                 }
             }
 
