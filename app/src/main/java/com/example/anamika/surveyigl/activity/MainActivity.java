@@ -90,8 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+       // toolbar.setTitle("IGL SURVEY");
+
         button_submit = findViewById(R.id.submit_button);
-        button_add_new = findViewById(R.id.add_new_button);
+        //button_add_new = findViewById(R.id.add_new_button);
 
         final Intent finalStarterIntent = starterIntent;
         final Intent finalStarterIntent1 = starterIntent;
@@ -136,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_add_new.setOnClickListener(new View.OnClickListener() {
+        /*button_add_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -155,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 textView_lat.setText("");
                 textView_lng.setText("");
             }
-        });
+        });*/
     }
     public void submitSurveyData(){
 
@@ -164,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText11.getText().toString(),
                 lat,lng,formattedDate);
 
-        //AppSharedData.save(MainActivity.this, Constants.MTR_SRL_NUM_KEY, editText7.getText().toString());
+        AppSharedData.save(MainActivity.this, Constants.MTR_SRL_NUM_KEY, editText7.getText().toString());
 
 
         call.enqueue(new Callback<List<SurvayStatus>>() {

@@ -275,6 +275,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                 params.put("date_time", formattedDate);
                 params.put("serialno", AppSharedData.get(VolleySendingMeterImageActivity.this, Constants.MTR_SRL_NUM_KEY,""));
                 params.put("img_type", 1+"");
+
                 System.out.println("Login SendData" + params);
                 return params;
             }

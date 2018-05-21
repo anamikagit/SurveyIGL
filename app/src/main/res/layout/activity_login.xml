@@ -10,13 +10,9 @@ android:layout_height="match_parent">
     android:layout_height="wrap_content"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#FFD54F"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    <include android:id="@+id/myToolbar"
+        layout="@layout/toolbar"/>
+
 </android.support.design.widget.AppBarLayout>
 
 <LinearLayout
@@ -71,9 +67,10 @@ android:layout_height="match_parent">
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_sign_up"
+        android:layout_alignParentBottom="true"
         android:background="#FFD54F"
         android:layout_marginTop="40dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>
 
