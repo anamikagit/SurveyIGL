@@ -33,11 +33,13 @@
         <service android:name=".GPSTracker" />
 
         <activity android:name=".activity.RetroSendingMeterImageActivity" />
-        <activity android:name=".activity.SharedPrefActivity" />
-        <activity android:name=".activity.VolleySendingMeterImageActivity" />
+        <activity android:name=".activity.VolleySendingMeterImageActivity"
+                  android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

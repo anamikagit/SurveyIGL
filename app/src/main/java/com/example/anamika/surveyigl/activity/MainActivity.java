@@ -11,11 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anamika.surveyigl.Constants;
 import com.example.anamika.surveyigl.GPSTracker;
 import com.example.anamika.surveyigl.R;
 import com.example.anamika.surveyigl.model.SurvayStatus;
 import com.example.anamika.surveyigl.rest.ApiClient;
 import com.example.anamika.surveyigl.rest.ApiInterface;
+import com.example.anamika.surveyigl.util.AppSharedData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private List<String> surveyFields = new ArrayList<String>();
+   // private List<String> surveyFields = new ArrayList<String>();
     GPSTracker gps;
     String lat,lng,formattedDate;
     Double latitude,longitude;
@@ -88,8 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+       // toolbar.setTitle("IGL SURVEY");
+
         button_submit = findViewById(R.id.submit_button);
-        button_add_new = findViewById(R.id.add_new_button);
+        //button_add_new = findViewById(R.id.add_new_button);
 
         final Intent finalStarterIntent = starterIntent;
         final Intent finalStarterIntent1 = starterIntent;
@@ -134,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_add_new.setOnClickListener(new View.OnClickListener() {
+        /*button_add_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -153,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 textView_lat.setText("");
                 textView_lng.setText("");
             }
-        });
+        });*/
     }
     public void submitSurveyData(){
 
@@ -162,11 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText11.getText().toString(),
                 lat,lng,formattedDate);
 
+        AppSharedData.save(MainActivity.this, Constants.MTR_SRL_NUM_KEY, editText7.getText().toString());
 
-       /* Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
-                editText12.getText().toString(),editText2.getText().toString(),editText3.getText().toString(),editText4.getText().toString(),
-                editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText8.getText().toString(),
-                editText9.getText().toString(),editText10.getText().toString(),editText11.getText().toString(),lat,lng);*/
 
         call.enqueue(new Callback<List<SurvayStatus>>() {
             @Override

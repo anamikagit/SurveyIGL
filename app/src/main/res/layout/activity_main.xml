@@ -232,15 +232,16 @@
         android:inputType="numberDecimal"
         android:id="@+id/edt11"/>
     <Button
-        android:layout_width="150dp"
+        android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:id="@+id/submit_button"
-        android:text="submit"
+        android:text="submit and continue"
         android:textSize="18dp"
+        android:layout_alignParentBottom="true"
         android:background="#FFD54F"
         android:layout_below="@id/edt11"
         />
-            <Button
+            <!--<Button
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/add_new_button"
@@ -250,7 +251,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true" />-->
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

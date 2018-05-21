@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,7 +25,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.anamika.surveyigl.Constants;
 import com.example.anamika.surveyigl.R;
+import com.example.anamika.surveyigl.model.LogoutResponce;
+import com.example.anamika.surveyigl.model.SurvayStatus;
+import com.example.anamika.surveyigl.rest.ApiClient;
+import com.example.anamika.surveyigl.rest.ApiInterface;
+import com.example.anamika.surveyigl.util.AppSharedData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,8 +43,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Field;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
@@ -53,6 +65,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
 
     // file url to store image/video
     private Uri fileUri;
+    ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +97,33 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         formattedDate = df.format(c.getTime());
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+
+            case R.id.menuAddSurvey:
+               // Toast.makeText(this, "You clicked settings", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(VolleySendingMeterImageActivity.this,MainActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.menuLogout:
+               // Toast.makeText(this, "You clicked logout", Toast.LENGTH_SHORT).show();
+                sendLogoutCall();
+                break;
+        }
+        return true;
+    }
+
     public Uri getOutputMediaFileUri(int type) {
         return Uri.fromFile(getOutputMediaFile(type));
     }
@@ -209,7 +249,9 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                             for(int j=0;j<array.length();j++) {
                                 JSONObject json = array.getJSONObject(j);
                                 if (!(imageCode.isEmpty())) {
-                                    Toast.makeText(getApplicationContext(), "Data Updated..Image Sent Successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Image Sent Successfully", Toast.LENGTH_LONG).show();
+                                    btnSendImg.setText("Image Submitted");
+                                    btnSendImg.setEnabled(false);
                                 } else {
                                     Toast.makeText(VolleySendingMeterImageActivity.this, "Login Again!! image is not clicked properly", Toast.LENGTH_LONG).show();
                                 }
@@ -223,7 +265,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                        // mProgressDialog.dismiss();
-                        Toast.makeText(VolleySendingMeterImageActivity.this, "Error, Please try again", Toast.LENGTH_LONG).show();
+                        Toast.makeText(VolleySendingMeterImageActivity.this, "Please try again", Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -231,8 +273,9 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("img_data", imageCode);
                 params.put("date_time", formattedDate);
-                params.put("serialno", 86474+"");
+                params.put("serialno", AppSharedData.get(VolleySendingMeterImageActivity.this, Constants.MTR_SRL_NUM_KEY,""));
                 params.put("img_type", 1+"");
+
                 System.out.println("Login SendData" + params);
                 return params;
             }
@@ -240,4 +283,33 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-}
+
+    public  void sendLogoutCall(){
+       String logoutUid =  AppSharedData.get(VolleySendingMeterImageActivity.this,Constants.LOGOUT_ID,"");
+        Call<List<LogoutResponce>> call = apiService.sendLogotCall(logoutUid);
+
+       // AppSharedData.save(VolleySendingMeterImageActivity.this, Constants.LOGOUT_ID, editText7.getText().toString());
+
+
+        call.enqueue(new Callback<List<LogoutResponce>>() {
+            @Override
+            public void onResponse(Call<List<LogoutResponce>> call, retrofit2.Response<List<LogoutResponce>> response) {
+                List<LogoutResponce> logoutResponces = response.body();
+                if(logoutResponces != null && logoutResponces.size()>0){
+                    LogoutResponce logoutResponce = logoutResponces.get(0);
+                    Toast.makeText(VolleySendingMeterImageActivity.this,"Logged Out Successfully", Toast.LENGTH_SHORT).show();
+               Intent i = new Intent(VolleySendingMeterImageActivity.this,LoginActivity.class);
+               startActivity(i);
+                }
+                else{
+                    Toast.makeText(VolleySendingMeterImageActivity.this,"Try Again", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<LogoutResponce>> call, Throwable t) {
+
+            }
+        });
+    }
+    }

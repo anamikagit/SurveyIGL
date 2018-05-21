@@ -42,10 +42,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.anamika.surveyigl.Constants;
 import com.example.anamika.surveyigl.R;
+import com.example.anamika.surveyigl.model.LoginResponce;
 import com.example.anamika.surveyigl.model.SurvayStatus;
 import com.example.anamika.surveyigl.rest.ApiClient;
 import com.example.anamika.surveyigl.rest.ApiInterface;
+import com.example.anamika.surveyigl.util.AppSharedData;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputUid,inputPassword;
     private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutPassword;
     private Button btnLogIn;
-    Editable saveUid;
-    Editable savePwd;
+    String saveUid;
+    String savePwd;
     ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     @Override
@@ -71,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
@@ -90,35 +93,37 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                saveUid = inputUid.getText().toString();
+                savePwd = inputPassword.getText().toString();
                // submitForm();
                 sendLoginCredential();
-                Intent i = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(i);
 
             }
         });
     }
 
+
     /**
      * Validating form
      */
-    private void submitForm() {
+   /* private void submitForm() {
         if (!validateName()) {
             return;
         }
 
-        /*if (!validateEmail()) {
+        *//*if (!validateEmail()) {
             return;
         }
 
         if (!validatePassword()) {
             return;
-        }*/
+        }*//*
 
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
-    }
+        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
+    }*/
 
-    private boolean validateName() {
+   /* private boolean validateName() {
         if (inputUid.getText().toString().trim().isEmpty()) {
             inputLayoutName.setError(getString(R.string.err_msg_name));
             requestFocus(inputUid);
@@ -129,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
         return true;
     }
-
+*/
     /*private boolean validateEmail() {
         String email = inputEmail.getText().toString().trim();
 
@@ -183,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
         public void afterTextChanged(Editable editable) {
             switch (view.getId()) {
                 case R.id.input_uid:
-                    validateName();
+                   // validateName();
                     break;
                 /*case R.id.input_email:
                     validateEmail();
@@ -197,29 +202,31 @@ public class LoginActivity extends AppCompatActivity {
 
     public void sendLoginCredential(){
 
-        Call<List<SurvayStatus>> call = apiService.sendLoginCredential("","");
+        Call<List<LoginResponce>> call = apiService.sendLoginCredential(saveUid,savePwd);
 
-
-       /* Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
-                editText12.getText().toString(),editText2.getText().toString(),editText3.getText().toString(),editText4.getText().toString(),
-                editText5.getText().toString(),editText6.getText().toString(),editText7.getText().toString(),editText8.getText().toString(),
-                editText9.getText().toString(),editText10.getText().toString(),editText11.getText().toString(),lat,lng);*/
-
-        call.enqueue(new Callback<List<SurvayStatus>>() {
+        call.enqueue(new Callback<List<LoginResponce>>() {
             @Override
-            public void onResponse(Call<List<SurvayStatus>> call, Response<List<SurvayStatus>> response) {
-                List<SurvayStatus> survayStatuses = response.body();
-                if(survayStatuses != null && survayStatuses.size()>0){
-                    SurvayStatus survayStatus = survayStatuses.get(0);
-                    Toast.makeText(LoginActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(LoginActivity.this,"Error Submitting Form", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<List<LoginResponce>> call, Response<List<LoginResponce>> response) {
+                List<LoginResponce> loginResponces = response.body();
+                if(loginResponces != null && loginResponces.size()>0){
+                    LoginResponce survayStatus = loginResponces.get(0);
+
+                    if(survayStatus.getResponse().equals("success"))
+                    {
+                        Toast.makeText(LoginActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(i);
+
+                        AppSharedData.save(LoginActivity.this, Constants.LOGOUT_ID, inputUid.getText().toString());
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this,"Login Id or password is incorrect", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<SurvayStatus>> call, Throwable t) {
+            public void onFailure(Call<List<LoginResponce>> call, Throwable t) {
 
             }
         });
