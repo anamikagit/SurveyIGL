@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -67,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogIn;
     String saveUid;
     String savePwd;
+    int flag = 0;
     ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     @Override
@@ -101,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        checkAndRequestPermissions();
     }
 
 
@@ -197,6 +202,31 @@ public class LoginActivity extends AppCompatActivity {
                     validatePassword();
                     break;*/
             }
+        }
+    }
+
+
+    private void checkAndRequestPermissions() {
+        if (flag == 0) {
+            String[] permissions = new String[] {
+                    "android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE",
+                    "android.permission.VIBRATE", "android.permission.INTERNET",
+                    "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.ACCESS_FINE_LOCATION", "android.permission.WAKE_LOCK",
+                    "android.permission.ACCESS_NETWORK_STATE", "android.permission.READ_PHONE_STATE"
+            };
+            List<String> listPermissionsNeeded = new ArrayList<>();
+            for (String permission : permissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    listPermissionsNeeded.add(permission);
+                }
+            }
+            if (!listPermissionsNeeded.isEmpty()) {
+                ActivityCompat
+                        .requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                                1);
+            }
+            flag = 1;
         }
     }
 
