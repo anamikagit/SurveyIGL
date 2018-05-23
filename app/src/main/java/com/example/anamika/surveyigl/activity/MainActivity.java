@@ -142,10 +142,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);*/
             }
         });
-
-        /*button_add_new.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            }
+    public void clearForm(){
 
                 editText1.getText().clear();
                 editText2.getText().clear();
@@ -154,15 +152,10 @@ public class MainActivity extends AppCompatActivity {
                 editText5.getText().clear();
                 editText6.getText().clear();
                 editText7.getText().clear();
-                //editText8.getText().clear();
-                //editText9.getText().clear();
-                //editText10.getText().clear();
                 editText11.getText().clear();
                 editText12.getText().clear();
                 textView_lat.setText("");
                 textView_lng.setText("");
-            }
-        });*/
     }
 
     private void checkAndRequestPermissions() {
@@ -205,11 +198,14 @@ public class MainActivity extends AppCompatActivity {
                 if(survayStatuses != null && survayStatuses.size()>0){
                     SurvayStatus survayStatus = survayStatuses.get(0);
                    // Toast.makeText(MainActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
+                    if(survayStatus.getResponse().equals("success")){
                     Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
                     startActivity(i);
-                }
+                    clearForm();}
+
                 else{
                     Toast.makeText(MainActivity.this,"Fill All Fields Carefully", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

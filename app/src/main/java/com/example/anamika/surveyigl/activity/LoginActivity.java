@@ -239,9 +239,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<List<LoginResponce>> call, Response<List<LoginResponce>> response) {
                 List<LoginResponce> loginResponces = response.body();
                 if(loginResponces != null && loginResponces.size()>0){
-                    LoginResponce survayStatus = loginResponces.get(0);
+                    LoginResponce loginResponce = loginResponces.get(0);
 
-                    if(survayStatus.getResponse().equals("success"))
+                    if(loginResponce.getResponse().equals("success"))
                     {
                         Toast.makeText(LoginActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(LoginActivity.this,MainActivity.class);

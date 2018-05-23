@@ -238,6 +238,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
         }
         return imageCode;
     }
+
     public void SendingImage()
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://111.118.178.163/amrs_igl_api/webservice.asmx/Ins_meter_image?",
