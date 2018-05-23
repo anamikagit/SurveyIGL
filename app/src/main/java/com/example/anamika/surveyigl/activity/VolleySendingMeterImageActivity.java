@@ -253,6 +253,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                                     btnSendImg.setText("Image Submitted");
                                     btnSendImg.setEnabled(false);
                                     clickImg.setVisibility(Button.GONE);
+                                    imageView.setImageResource(R.mipmap.tick_green);
                                 } else {
                                     Toast.makeText(VolleySendingMeterImageActivity.this, "Login Again!! image is not clicked properly", Toast.LENGTH_LONG).show();
                                 }
