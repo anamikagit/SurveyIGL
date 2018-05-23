@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -67,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogIn;
     String saveUid;
     String savePwd;
+    int flag = 0;
     ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     @Override
@@ -101,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        checkAndRequestPermissions();
     }
 
 
@@ -200,6 +205,35 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+    private void checkAndRequestPermissions() {
+        if (flag == 0) {
+            String[] permissions = new String[] {
+                    "android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE",
+                    "android.permission.VIBRATE", "android.permission.INTERNET",
+                    "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.ACCESS_FINE_LOCATION", "android.permission.WAKE_LOCK",
+                    "android.permission.ACCESS_NETWORK_STATE", "android.permission.READ_PHONE_STATE"
+            };
+            List<String> listPermissionsNeeded = new ArrayList<>();
+            for (String permission : permissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    listPermissionsNeeded.add(permission);
+                }
+            }
+            if (!listPermissionsNeeded.isEmpty()) {
+                ActivityCompat
+                        .requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                                1);
+            }
+            flag = 1;
+        }
+    }
+    public void clearIdPwdEditTextData(){
+        inputUid.setText(null);
+        inputPassword.setText(null);
+    }
+
     public void sendLoginCredential(){
 
         Call<List<LoginResponce>> call = apiService.sendLoginCredential(saveUid,savePwd);
@@ -209,15 +243,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<List<LoginResponce>> call, Response<List<LoginResponce>> response) {
                 List<LoginResponce> loginResponces = response.body();
                 if(loginResponces != null && loginResponces.size()>0){
-                    LoginResponce survayStatus = loginResponces.get(0);
+                    LoginResponce loginResponce = loginResponces.get(0);
 
-                    if(survayStatus.getResponse().equals("success"))
+                    if(loginResponce.getResponse().equals("success"))
                     {
                         Toast.makeText(LoginActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(i);
 
                         AppSharedData.save(LoginActivity.this, Constants.LOGOUT_ID, inputUid.getText().toString());
+                        clearIdPwdEditTextData();
                     }
                     else{
                         Toast.makeText(LoginActivity.this,"Login Id or password is incorrect", Toast.LENGTH_SHORT).show();
@@ -231,4 +266,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    /*@Override
+            public void onBackPressed(){
+                    Intent launchNextActivity = new Intent(B.class, A.class);
+                    launchNextActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    launchNextActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    launchNextActivity.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(launchNextActivity);
+                                        }*/
 }

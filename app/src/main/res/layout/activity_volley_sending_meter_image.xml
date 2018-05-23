@@ -35,7 +35,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:text="Take a Picture" />
+            android:textColorHighlight="#BDECB6"
+            android:text="capture meter image" />
 
         <!-- <TextView
              android:id="@+id/tv_preview"
@@ -58,7 +59,14 @@
             android:layout_below="@+id/btnCapturePicture"
             android:visibility="gone" />
 
-        <!-- To preview video recorded -->
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgPreview"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:text="IMAGE SUBMITTED"/>
     </RelativeLayout>
     <Button
         android:id="@+id/sendImage"

@@ -1,8 +1,11 @@
 package com.example.anamika.surveyigl.activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     GPSTracker gps;
     String lat,lng,formattedDate;
     Double latitude,longitude;
+    int flag = 0;
     private static final String TAG = "MAIN_ACTIVITY_ASYNC";
 
     Button button_submit,button_add_new;
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     // Now formattedDate have current date/time
        // Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
 
-
+        checkAndRequestPermissions();
     //to restart the activity
         Intent starterIntent = new Intent();
         starterIntent = getIntent();
@@ -132,16 +136,14 @@ public class MainActivity extends AppCompatActivity {
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_SHORT).show();
                 submitSurveyData();
                 /*Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
                 startActivity(i);*/
             }
         });
-
-        /*button_add_new.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            }
+    public void clearForm(){
 
                 editText1.getText().clear();
                 editText2.getText().clear();
@@ -150,15 +152,34 @@ public class MainActivity extends AppCompatActivity {
                 editText5.getText().clear();
                 editText6.getText().clear();
                 editText7.getText().clear();
-                //editText8.getText().clear();
-                //editText9.getText().clear();
-                //editText10.getText().clear();
                 editText11.getText().clear();
                 editText12.getText().clear();
                 textView_lat.setText("");
                 textView_lng.setText("");
+    }
+
+    private void checkAndRequestPermissions() {
+        if (flag == 0) {
+            String[] permissions = new String[] {
+                    "android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE",
+                    "android.permission.VIBRATE", "android.permission.INTERNET",
+                    "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.ACCESS_FINE_LOCATION", "android.permission.WAKE_LOCK",
+                    "android.permission.ACCESS_NETWORK_STATE", "android.permission.READ_PHONE_STATE"
+            };
+            List<String> listPermissionsNeeded = new ArrayList<>();
+            for (String permission : permissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    listPermissionsNeeded.add(permission);
+                }
             }
-        });*/
+            if (!listPermissionsNeeded.isEmpty()) {
+                ActivityCompat
+                        .requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                                1);
+            }
+            flag = 1;
+        }
     }
     public void submitSurveyData(){
 
@@ -176,12 +197,15 @@ public class MainActivity extends AppCompatActivity {
                 List<SurvayStatus> survayStatuses = response.body();
                 if(survayStatuses != null && survayStatuses.size()>0){
                     SurvayStatus survayStatus = survayStatuses.get(0);
-                    Toast.makeText(MainActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(MainActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
+                    if(survayStatus.getResponse().equals("success")){
                     Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
                     startActivity(i);
-                }
+                    clearForm();}
+
                 else{
                     Toast.makeText(MainActivity.this,"Fill All Fields Carefully", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -191,4 +215,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*@Override
+    public void onBackPressed(){
+        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(i);
+    }*/
 }
