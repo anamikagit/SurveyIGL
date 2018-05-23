@@ -229,6 +229,10 @@ public class LoginActivity extends AppCompatActivity {
             flag = 1;
         }
     }
+    public void clearIdPwdEditTextData(){
+        inputUid.setText(null);
+        inputPassword.setText(null);
+    }
 
     public void sendLoginCredential(){
 
@@ -248,6 +252,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(i);
 
                         AppSharedData.save(LoginActivity.this, Constants.LOGOUT_ID, inputUid.getText().toString());
+                        clearIdPwdEditTextData();
                     }
                     else{
                         Toast.makeText(LoginActivity.this,"Login Id or password is incorrect", Toast.LENGTH_SHORT).show();

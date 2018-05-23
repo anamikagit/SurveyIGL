@@ -253,14 +253,14 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                             for(int j=0;j<array.length();j++) {
                                 JSONObject json = array.getJSONObject(j);
                                 if (!(imageCode.isEmpty())) {
-                                   // Toast.makeText(getApplicationContext(), "Submitting Image To Server", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Submitting", Toast.LENGTH_SHORT).show();
                                     btnSendImg.setText("Survey completed");
                                     btnSendImg.setEnabled(false);
                                     clickImg.setVisibility(Button.GONE);
                                     imageView.setImageResource(R.mipmap.tick_green);
                                     tv_done.setVisibility(TextView.VISIBLE);
                                 } else {
-                                    Toast.makeText(VolleySendingMeterImageActivity.this, "Login Again!! image is not clicked properly", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(VolleySendingMeterImageActivity.this, "Login Again!! image not clicked properly", Toast.LENGTH_LONG).show();
                                 }
                             }
                         } catch (JSONException e) {
