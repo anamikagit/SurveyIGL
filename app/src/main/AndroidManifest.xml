@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.VolleySendingMeterImageActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +33,7 @@
         <service android:name=".GPSTracker" />
 
         <activity android:name=".activity.RetroSendingMeterImageActivity" />
-        <activity android:name=".activity.LoginActivity"
+        <activity android:name=".activity.VolleySendingMeterImageActivity"
                   android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.MainActivity"

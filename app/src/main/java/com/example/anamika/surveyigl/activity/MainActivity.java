@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,"Submitting data to server", Toast.LENGTH_SHORT).show();
                 submitSurveyData();
                 /*Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
                 startActivity(i);*/
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 List<SurvayStatus> survayStatuses = response.body();
                 if(survayStatuses != null && survayStatuses.size()>0){
                     SurvayStatus survayStatus = survayStatuses.get(0);
-                    Toast.makeText(MainActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(MainActivity.this,"Form Submitted Successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
                     startActivity(i);
                 }
