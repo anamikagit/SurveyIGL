@@ -249,9 +249,10 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                             for(int j=0;j<array.length();j++) {
                                 JSONObject json = array.getJSONObject(j);
                                 if (!(imageCode.isEmpty())) {
-                                    Toast.makeText(getApplicationContext(), "Image Sent Successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Submitting Image To Server", Toast.LENGTH_SHORT).show();
                                     btnSendImg.setText("Image Submitted");
                                     btnSendImg.setEnabled(false);
+                                    clickImg.setVisibility(Button.GONE);
                                 } else {
                                     Toast.makeText(VolleySendingMeterImageActivity.this, "Login Again!! image is not clicked properly", Toast.LENGTH_LONG).show();
                                 }

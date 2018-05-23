@@ -220,9 +220,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+    /*@Override
     public void onBackPressed(){
         Intent i = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(i);
-    }
+    }*/
 }
