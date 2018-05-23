@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -59,6 +60,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
     Bitmap bitmap;
     String imageCode;
     String formattedDate;
+    TextView tv_done;
     // directory name to store captured images and videos
     private static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -75,6 +77,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
         btnSendImg = findViewById(R.id.sendImage);
         imageView = findViewById(R.id.imgPreview);
         clickImg = findViewById(R.id.btnCapturePicture);
+        tv_done = findViewById(R.id.tv_done);
 
         clickImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,11 +252,12 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                             for(int j=0;j<array.length();j++) {
                                 JSONObject json = array.getJSONObject(j);
                                 if (!(imageCode.isEmpty())) {
-                                    Toast.makeText(getApplicationContext(), "Submitting Image To Server", Toast.LENGTH_SHORT).show();
-                                    btnSendImg.setText("Image Submitted");
+                                   // Toast.makeText(getApplicationContext(), "Submitting Image To Server", Toast.LENGTH_SHORT).show();
+                                    btnSendImg.setText("Survey completed");
                                     btnSendImg.setEnabled(false);
                                     clickImg.setVisibility(Button.GONE);
                                     imageView.setImageResource(R.mipmap.tick_green);
+                                    tv_done.setVisibility(TextView.VISIBLE);
                                 } else {
                                     Toast.makeText(VolleySendingMeterImageActivity.this, "Login Again!! image is not clicked properly", Toast.LENGTH_LONG).show();
                                 }
