@@ -1,8 +1,11 @@
 package com.example.anamika.surveyigl.activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     GPSTracker gps;
     String lat,lng,formattedDate;
     Double latitude,longitude;
+    int flag = 0;
     private static final String TAG = "MAIN_ACTIVITY_ASYNC";
 
     Button button_submit,button_add_new;
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     // Now formattedDate have current date/time
        // Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
 
-
+        checkAndRequestPermissions();
     //to restart the activity
         Intent starterIntent = new Intent();
         starterIntent = getIntent();
@@ -160,6 +164,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
     }
+
+    private void checkAndRequestPermissions() {
+        if (flag == 0) {
+            String[] permissions = new String[] {
+                    "android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE",
+                    "android.permission.VIBRATE", "android.permission.INTERNET",
+                    "android.permission.ACCESS_COARSE_LOCATION",
+                    "android.permission.ACCESS_FINE_LOCATION", "android.permission.WAKE_LOCK",
+                    "android.permission.ACCESS_NETWORK_STATE", "android.permission.READ_PHONE_STATE"
+            };
+            List<String> listPermissionsNeeded = new ArrayList<>();
+            for (String permission : permissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    listPermissionsNeeded.add(permission);
+                }
+            }
+            if (!listPermissionsNeeded.isEmpty()) {
+                ActivityCompat
+                        .requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                                1);
+            }
+            flag = 1;
+        }
+    }
     public void submitSurveyData(){
 
         Call<List<SurvayStatus>> call = apiService.sendSurveyResponce(editText1.getText().toString(),
@@ -190,5 +218,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(i);
     }
 }
