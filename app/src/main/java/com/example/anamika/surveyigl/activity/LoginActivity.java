@@ -274,4 +274,9 @@ public class LoginActivity extends AppCompatActivity {
                     launchNextActivity.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(launchNextActivity);
                                         }*/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
