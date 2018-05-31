@@ -201,7 +201,9 @@ public class MainActivity extends AppCompatActivity {
                     if(survayStatus.getResponse().equals("success")){
                     Intent i = new Intent(MainActivity.this,VolleySendingMeterImageActivity.class);
                     startActivity(i);
-                    clearForm();}
+                    clearForm();
+                    MainActivity.this.finish();
+                    }
 
                 else{
                     Toast.makeText(MainActivity.this,"Fill All Fields Carefully", Toast.LENGTH_SHORT).show();

@@ -307,6 +307,7 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                     Toast.makeText(VolleySendingMeterImageActivity.this,"Logged Out Successfully", Toast.LENGTH_SHORT).show();
                Intent i = new Intent(VolleySendingMeterImageActivity.this,LoginActivity.class);
                startActivity(i);
+               VolleySendingMeterImageActivity.this.finish();
                 }
                 else{
                     Toast.makeText(VolleySendingMeterImageActivity.this,"Try Again", Toast.LENGTH_SHORT).show();
