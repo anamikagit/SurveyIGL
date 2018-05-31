@@ -70,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
     String saveUid;
     String savePwd;
     int flag = 0;
+    ConnectionDetector cd;
+    AlertDialogManager alert = new AlertDialogManager();
     ApiInterface apiService = ApiClient.getClient(ApiClient.baseUrl).create(ApiInterface.class);
 
     @Override
@@ -106,6 +108,14 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         checkAndRequestPermissions();
+        cd = new ConnectionDetector(getApplicationContext());
+        if (!cd.isConnectingToInternet()) {
+            // Internet Connection is not present
+            alert.showAlertDialog(LoginActivity.this, "Internet Connection Error",
+                    "Please connect to working Internet connection", false);
+            // stop executing code by return
+            return;
+        }
     }
 
 
