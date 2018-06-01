@@ -116,6 +116,10 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
             case R.id.menuAddSurvey:
                // Toast.makeText(this, "You clicked settings", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(VolleySendingMeterImageActivity.this,MainActivity.class);
+
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 startActivity(i);
                 break;
 
@@ -305,8 +309,11 @@ public class VolleySendingMeterImageActivity extends AppCompatActivity {
                 if(logoutResponces != null && logoutResponces.size()>0){
                     LogoutResponce logoutResponce = logoutResponces.get(0);
                     Toast.makeText(VolleySendingMeterImageActivity.this,"Logged Out Successfully", Toast.LENGTH_SHORT).show();
-               Intent i = new Intent(VolleySendingMeterImageActivity.this,LoginActivity.class);
-               startActivity(i);
+
+                    Intent i = new Intent(VolleySendingMeterImageActivity.this,LoginActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
                 }
                 else{
                     Toast.makeText(VolleySendingMeterImageActivity.this,"Try Again", Toast.LENGTH_SHORT).show();
